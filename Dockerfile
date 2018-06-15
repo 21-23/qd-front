@@ -44,8 +44,11 @@ COPY --from=cssqd-build /cssqd/dist-prod /usr/share/nginx/2123/cssqd/
 
 RUN openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 4096
 
+# TODO: put default pem-s to run nginx; later acme-client will update
+COPY ./cert/fullchain.pem /etc/ssl/acme/2123.io/fullchain.pem
+COPY ./cert/privkey.pem /etc/ssl/acme/private/2123.io/privkey.pem
+
 # certificate auto-refresh
 COPY ./cert/acme-client /etc/periodic/weekly/
 RUN chmod +x /etc/periodic/weekly/acme-client
-# TODO: to start acme - we need nginx; to start nginx - we need certs; to generate certs - we need acme :(
-# CMD ["/etc/periodic/weekly/acme-client"]
+CMD ["/etc/periodic/weekly/acme-client"]
