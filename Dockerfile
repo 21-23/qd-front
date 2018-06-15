@@ -32,7 +32,7 @@ EXPOSE 80
 EXPOSE 443
 
 RUN apk update
-RUN apk add acme-client libressl openrc
+RUN apk add acme-client libressl
 
 RUN rm -rf /etc/nginx/nginx.conf /etc/nginx/conf.d/*
 COPY ./nginx/nginx.conf /etc/nginx/
@@ -47,4 +47,5 @@ RUN openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 4096
 # certificate auto-refresh
 COPY ./cert/acme-client /etc/periodic/weekly/
 RUN chmod +x /etc/periodic/weekly/acme-client
-CMD ["/etc/periodic/weekly/acme-client"]
+# TODO: to start acme - we need nginx; to start nginx - we need certs; to generate certs - we need acme :(
+# CMD ["/etc/periodic/weekly/acme-client"]
