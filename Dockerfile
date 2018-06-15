@@ -51,4 +51,5 @@ COPY ./cert/privkey.pem /etc/ssl/acme/private/2123.io/privkey.pem
 # certificate auto-refresh
 COPY ./cert/acme-client /etc/periodic/weekly/
 RUN chmod +x /etc/periodic/weekly/acme-client
-CMD ["/etc/periodic/weekly/acme-client"]
+# TODO: how to automate this run?
+# CMD ["/etc/periodic/weekly/acme-client"]
