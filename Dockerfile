@@ -30,6 +30,7 @@ FROM nginx:alpine
 
 EXPOSE 80
 EXPOSE 443
+EXPOSE 3001
 
 RUN apk update
 RUN apk add acme-client libressl
