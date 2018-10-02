@@ -24,6 +24,13 @@ RUN git clone https://github.com/21-23/cssqd-ui.git ./
 RUN npm i
 RUN npm run build:prod
 
+# -------- build jsqd --------
+FROM build-env as jsqd-build
+WORKDIR /jsqd
+RUN git clone https://github.com/21-23/jsqd-ui.git ./
+RUN npm i
+RUN npm run build:prod
+
 # -------- start nginx --------
 # https://wiki.alpinelinux.org/wiki/Nginx_as_reverse_proxy_with_acme_(letsencrypt)
 FROM nginx:alpine
@@ -40,6 +47,7 @@ COPY ./nginx/conf.d /etc/nginx/conf.d
 COPY --from=landing-build /landing/dist /usr/share/nginx/2123/
 COPY --from=lodashqd-build /_qd/dist /usr/share/nginx/2123/_qd/
 COPY --from=cssqd-build /cssqd/dist-prod /usr/share/nginx/2123/cssqd/
+COPY --from=jsqd-build /jsqd/dist-prod /usr/share/nginx/2123/jsqd/
 
 
 RUN openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 4096
