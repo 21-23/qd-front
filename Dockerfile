@@ -33,7 +33,7 @@ RUN npm run build:prod
 
 # -------- start nginx --------
 # https://wiki.alpinelinux.org/wiki/Nginx_as_reverse_proxy_with_acme_(letsencrypt)
-FROM nginx:alpine
+FROM openresty/openresty:alpine
 
 EXPOSE 80
 EXPOSE 443
@@ -42,7 +42,8 @@ RUN apk update
 RUN apk add acme-client libressl
 
 RUN rm -rf /etc/nginx/nginx.conf /etc/nginx/conf.d/*
-COPY ./nginx/nginx.conf /etc/nginx/
+COPY ./nginx/nginx.conf /usr/local/openresty/nginx/conf/
+COPY ./nginx/scripts /usr/local/openresty/nginx/scripts
 COPY ./nginx/conf.d /etc/nginx/conf.d
 COPY --from=landing-build /landing/dist /usr/share/nginx/2123/
 COPY --from=lodashqd-build /_qd/dist /usr/share/nginx/2123/_qd/
