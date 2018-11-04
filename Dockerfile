@@ -42,10 +42,14 @@ EXPOSE 3001
 RUN apk update
 RUN apk add acme-client libressl
 
+# nginx-related
 RUN rm -rf /etc/nginx/nginx.conf /etc/nginx/conf.d/*
 COPY ./nginx/nginx.conf /usr/local/openresty/nginx/conf/
 COPY ./nginx/scripts /usr/local/openresty/nginx/scripts
 COPY ./nginx/conf.d /etc/nginx/conf.d
+# cron
+COPY ./cron/crontabs/root /etc/crontabs/
+# ui-s
 COPY --from=landing-build /landing/dist /usr/share/nginx/2123/
 COPY --from=lodashqd-build /_qd/dist /usr/share/nginx/2123/_qd/
 COPY --from=cssqd-build /cssqd/dist-prod /usr/share/nginx/2123/cssqd/
@@ -61,5 +65,7 @@ COPY ./cert/privkey.pem /etc/ssl/acme/private/2123.io/privkey.pem
 # certificate auto-refresh
 COPY ./cert/acme-client /etc/periodic/weekly/
 RUN chmod +x /etc/periodic/weekly/acme-client
-# TODO: how to automate this run?
-# CMD ["/etc/periodic/weekly/acme-client"]
+
+# qd-front scripts
+COPY ./qd-front-scripts/prod /usr/share/qd-front-scripts
+RUN chmod -R +x /usr/share/qd-front-scripts
