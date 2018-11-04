@@ -1,1 +1,1 @@
-docker run -p 80:80 -p 443:443 --mount type=bind,source="$(pwd)"/static/2123,destination=/usr/share/nginx/2123 qd_front
+docker run -p 80:80 -p 443:443 -p 3001:3001 --mount type=bind,source="$(pwd)"/static/2123,destination=/usr/share/nginx/2123 qd_front
