@@ -20,7 +20,7 @@ RUN npm run build
 # -------- build cssqd --------
 FROM build-env as cssqd-build
 WORKDIR /cssqd
-RUN git clone --branch v1.1.1 https://github.com/21-23/cssqd-ui.git ./
+RUN git clone --branch v1.2.0 https://github.com/21-23/cssqd-ui.git ./
 RUN npm i
 RUN npm run build:prod
 
