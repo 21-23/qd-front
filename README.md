@@ -22,6 +22,9 @@ To deploy `qd-front`:
 2. put `fullchain.pem` and `privkey.pem` from 21/23 Google Drive storage into `./cert/` directory;
 3. `sh build.sh`
 4. `sh run.sh`
+5. `sh build.ui.sh`
+
+In `prod` no UI is built, so in order to see *qd UI - run an appropriate build script per each UI or run `build.ui.sh` to build all the UI-s. To build, for instance, `cssqd` UI only - run `build.ui.cssqd.sh`.
 
 ## Critical thing to be done:
 - `envsubst` should be used to configure reverse proxy's URI
@@ -33,12 +36,10 @@ To deploy `qd-front`:
 `dev`:
 - uses certificates from `./cert/`, doen't generate new ones;
 - reverse proxy is pointed back to the host machine;
-- has no pre-built UIs. Each UI should be built separately;
 
 `prod`:
 - runs weekly cron job to refresh certificates;
 - reverse proxy is pointed back to the **2123** ultra machine;
-- builds all the UIs and automatically starts to serve;
 
 ### Why do you need `.lua` scripts?
 
