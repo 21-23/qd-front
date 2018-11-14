@@ -5,6 +5,6 @@ RUN mkdir ~/.ssh/
 RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 WORKDIR /cssqd
-RUN git clone --branch v1.2.2 https://github.com/21-23/cssqd-ui.git ./
+RUN git clone --branch v1.2.3 https://github.com/21-23/cssqd-ui.git ./
 RUN npm i
 RUN npm run build:prod
