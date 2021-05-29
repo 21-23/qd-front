@@ -1,4 +1,5 @@
 #!/bin/sh
 
 # refresh certificates
-certbot --nginx -d 2123.io
+# https://certbot.eff.org/docs/man/certbot.html
+certbot certonly --nginx -d 2123.io -m info@2123.io --agree-tos
