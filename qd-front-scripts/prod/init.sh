@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# start crond job
+crond -L /var/log/crond.log
+
 # https://certbot.eff.org/docs/man/certbot.html
 certbot certonly --nginx -d 2123.io -m info@2123.io --agree-tos
 
