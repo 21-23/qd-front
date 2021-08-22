@@ -17,8 +17,6 @@ COPY ./nginx/conf.d /etc/nginx/conf.d
 RUN ln -s /usr/local/openresty/nginx/conf/nginx.conf /etc/nginx/nginx.conf
 RUN ln -s /usr/local/openresty/nginx/conf/mime.types /etc/nginx/mime.types
 
-RUN openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 4096
-
 # TODO: put default pem-s to run nginx; later certbot will update
 # COPY ./cert/fullchain.pem /etc/letsencrypt/live/2123.io/fullchain.pem
 # COPY ./cert/privkey.pem /etc/letsencrypt/live/2123.io/privkey.pem
