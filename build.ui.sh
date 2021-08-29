@@ -2,6 +2,7 @@
 
 # build all the ui-s
 ./build.ui.2123.sh
+./build.ui.cm.sh
 
 ./build.ui._qd.sh
 ./build.ui.cssqd.sh
